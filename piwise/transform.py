@@ -1,7 +1,6 @@
 import numpy as np
 import torch
 
-from PIL import Image
 
 def colormap(n):
     cmap=np.zeros([n, 3]).astype(np.uint8)
@@ -39,9 +38,11 @@ class ToLabel:
 class Colorize:
 
     def __init__(self, n=22):
-        self.cmap = colormap(256)
-        self.cmap[n] = self.cmap[-1]
-        self.cmap = torch.from_numpy(self.cmap[:n])
+        # self.cmap = colormap(256)
+        # self.cmap[n] = self.cmap[-1]
+        # self.cmap = torch.from_numpy(self.cmap[:n])
+
+        self.cmap = torch.from_numpy(colormap(n))
 
     def __call__(self, gray_image):
         size = gray_image.size()
